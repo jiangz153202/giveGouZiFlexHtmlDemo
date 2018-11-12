@@ -1,23 +1,47 @@
 import React , { Component } from "react";
-import Card from './card';
-let arr = [1,2,3,4,5,6].map((val,index)=>{
-    return (
-        <div style={{"flex":"1","backgroundColor":"#000","display":"flex","padding":"50px"}}>
-            <Card number={val} />
-        </div>
-    )
-})
-class App extends Component{
-    constructor(){
-        super()
-        
-    }
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from './actions/counter.js';
+
+class App extends React.Component{
     render(){
         return (
-            <div style={{"width":"100%","display":"flex","flexWrap":"wrap"}}>
-                { arr }
+            <div>
+                测试
+                {this.props.v}
+                <input type="button" value="加一" onClick={this.props.actions.addTodo} />
+                {'  '}
+                <input type="button" value="减一" onClick={this.props.actions.drcTodo} />
             </div>
-        );
+        )
     }
 }
-export default App;
+
+// let App = ({v,actions}) => {
+//     console.log(actions);
+//     return (
+//         <div>
+//             <h1>{v}</h1>
+//             {'  '}
+//             <input type="button" value="加一" onClick={actions.addTodo} />
+//             {'  '}
+//             <input type="button" value="减一" onClick={actions.drcTodo} />
+//         </div>
+//     )
+// }
+
+
+export default connect(
+    (state) =>{
+        return {
+            v : state.v
+        }
+    },
+    (dispatch) => {
+        return {
+            actions : bindActionCreators(actions,dispatch)
+        }
+    }
+)(App);
+
+ 
