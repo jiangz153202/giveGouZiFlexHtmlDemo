@@ -16,10 +16,12 @@ const Counter = ({state,actions}) =>{
      )
 }  
 
+
+
 export default connect(
     (state) =>{
         return {
-            "v" : state.v
+            "v" : state.counter.v
         }
     },
     (dispatch)=>{

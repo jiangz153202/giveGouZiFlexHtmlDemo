@@ -34,7 +34,7 @@ class App extends React.Component{
 export default connect(
     (state) =>{
         return {
-            v : state.v
+            v : state.counter.v
         }
     },
     (dispatch) => {
